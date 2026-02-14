@@ -1,39 +1,68 @@
 import { useState } from 'react'
-import IconArrowRight from './assets/images/icon-arrow-right.svg'
-import IconCopy from './assets/images/icon-copy.svg'
+import { ArrowIcon } from './components/icons/ArrowIcon'
+import type { PasswordSettings } from './types'
+import Header from './components/Header'
+import PasswordDisplay from './components/PasswordDisplay'
+import LengthSlider from './components/LengthSlider'
+import Checkbox from './components/Checkbox'
+import StrengthIndicator from './components/StrengthIndicator'
+import { generatePassword } from './utils/password'
+
 
 function App() {
 
+  const [settings, setSettings] = useState<PasswordSettings>({
+    length: 10,
+    uppercase: true,
+    lowercase: false,
+    numbers: false,
+    symbols: false
+  });
+  const [password, setPassword] = useState<string>("");
+  const min = 1;
+  const max = 20;
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const option = e.target.name as keyof PasswordSettings;
+    setSettings(prev => ({ ...prev, [option]: e.target.checked }))
+  }
+
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSettings(prev => ({ ...prev, length: Number(e.target.value) }))
+  }
+
+  const handleCopy = async () => {
+    if (password.length === 0) return;
+
+    try {
+      await navigator.clipboard.writeText(password);
+    } catch (err) {
+      console.error("Kopieren fehlgeschlagen:", err);
+    }
+  };
+
+  const handleGenerate = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    setPassword(generatePassword(settings));
+  }
 
   return (
-    <div>
-      <header><h1>Password Generator</h1></header>
+    <div className='flex flex-col items-center min-h-dvh px-4 py-16'>
+      <Header />
       <main>
-        <section>
-          <div><input type='text' readOnly aria-label="Generated Password" placeholder='P4$5W0rD!' /><button type='button' aria-label="Copy password to clipboard"><img src={IconCopy} alt="" aria-hidden='true' /></button></div>
-          <form>
-            <div><div><label htmlFor="length-slider">Character Length</label><p>0</p></div><input type='range' id="length-slider" min={0} max={20} ></input></div>
-            <div>
-              <div>
-                <input type="checkbox" id='uppercase' />
-                <label htmlFor="uppercase">Include Uppercase Letters</label>
-              </div>
-              <div>
-                <input type="checkbox" id='lowercase' />
-                <label htmlFor="lowercase">Include Lowercase Letters</label>
-              </div>
-              <div>
-                <input type="checkbox" id='numbers' />
-                <label htmlFor="numbers">Include Numbers</label>
-              </div>
-              <div>
-                <input type="checkbox" id='symbols' />
-                <label htmlFor="symbols">Include Symbols</label>
-              </div>
+        <section className='flex flex-col gap-4 max-w-135'>
+          <PasswordDisplay password={password} onCopy={handleCopy} />
+          <form className='p-4 bg-grey-800 flex flex-col gap-4' onSubmit={handleGenerate}>
+            <LengthSlider length={settings.length} min={min} max={max} onChange={handleSliderChange} />
+            <div className='flex flex-col gap-4'>
+              <Checkbox label='Include Uppercase Letters' name='uppercase' checked={settings.uppercase} onChange={handleCheckboxChange} />
+              <Checkbox label='Include Lowercase Letters' name='lowercase' checked={settings.lowercase} onChange={handleCheckboxChange} />
+              <Checkbox label='Include Numbers' name='numbers' checked={settings.numbers} onChange={handleCheckboxChange} />
+              <Checkbox label='Include Symbols' name='symbols' checked={settings.symbols} onChange={handleCheckboxChange} />
             </div>
-            <div>
-              <div><label>Strength</label>Strength Indicator</div>
-              <button type='submit'>Generate <img src={IconArrowRight} alt="" aria-hidden='true' /></button>
+            <div className='flex flex-col gap-4'>
+              <StrengthIndicator score={3} />
+              <button type='submit' className='bg-green-200 flex py-4 px-26 justify-center items-center gap-4 text-preset-4 text-grey-800 uppercase border-green-200 border-2 md:text-preset-3 hover:cursor-pointer hover:bg-grey-950 hover:text-green-200 transition-colors'>Generate<ArrowIcon /></button>
             </div>
           </form>
         </section>
