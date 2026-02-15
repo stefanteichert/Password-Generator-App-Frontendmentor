@@ -13,8 +13,6 @@ describe('Password Generator Integration', () => {
     });
   });
 
-
-
   it('should toggle the generate button state based on options', async () => {
     const user = userEvent.setup();
     render(<App />);
