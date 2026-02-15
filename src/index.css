@@ -90,6 +90,11 @@
     border-color: var(--color-green-200);
   }
 
+  &:focus::-webkit-slider-thumb {
+    background: var(--color-grey-950);
+    border-color: var(--color-green-200);
+  }
+
   &::-moz-range-thumb {
     height: 1.5rem;
     width: 1.5rem;
@@ -101,6 +106,11 @@
   }
 
   &:hover::-moz-range-thumb {
+    background: var(--color-grey-950);
+    border-color: var(--color-green-200);
+  }
+
+  &:focus::-moz-range-thumb {
     background: var(--color-grey-950);
     border-color: var(--color-green-200);
   }

@@ -7,7 +7,7 @@ import LengthSlider from './components/LengthSlider'
 import Checkbox from './components/Checkbox'
 import StrengthIndicator from './components/StrengthIndicator'
 import { generatePassword } from './utils/password'
-
+import { calculatePasswordStrength } from './utils/strength'
 
 function App() {
 
@@ -46,6 +46,8 @@ function App() {
     setPassword(generatePassword(settings));
   }
 
+  const strengthScore = calculatePasswordStrength(settings);
+
   return (
     <div className='flex flex-col items-center min-h-dvh px-4 py-16'>
       <Header />
@@ -61,8 +63,19 @@ function App() {
               <Checkbox label='Include Symbols' name='symbols' checked={settings.symbols} onChange={handleCheckboxChange} />
             </div>
             <div className='flex flex-col gap-4'>
-              <StrengthIndicator score={3} />
-              <button type='submit' className='bg-green-200 flex py-4 px-26 justify-center items-center gap-4 text-preset-4 text-grey-800 uppercase border-green-200 border-2 md:text-preset-3 hover:cursor-pointer hover:bg-grey-950 hover:text-green-200 transition-colors'>Generate<ArrowIcon /></button>
+              <StrengthIndicator score={strengthScore} />
+              {strengthScore === 0 && (
+                <span aria-live="polite" className="text-red-500 text-preset-4">
+                  Please select at least one option
+                </span>
+              )}
+              <button
+                type='submit'
+                disabled={strengthScore === 0}
+                className='bg-green-200 text-grey-800 uppercase border-2 border-green-200 flex py-4 px-26 justify-center items-center gap-4 transition-colors enabled:hover:cursor-pointer enabled:hover:bg-grey-950
+                enabled:hover:text-green-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:grayscale-[0.5] ' >
+                Generate <ArrowIcon />
+              </button>
             </div>
           </form>
         </section>
