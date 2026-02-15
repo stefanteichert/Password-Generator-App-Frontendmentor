@@ -1,6 +1,6 @@
 import { CopyIcon } from '../components/icons/CopyIcon'
 import { useState, useEffect } from 'react';
-
+import { vi } from 'vitest';
 interface PasswordDisplayProps {
   password: string,
   onCopy: () => void;
