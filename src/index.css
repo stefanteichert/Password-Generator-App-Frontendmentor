@@ -75,8 +75,8 @@
     border-radius: 50%;
     background: var(--color-grey-200);
     cursor: pointer;
-    margin-top: -8px;
-    border: 2px solid var(--color-grey-200);
+    margin-top: -0.5rem;
+    border: 0.125rem solid var(--color-grey-200);
     transition: all 0.2s ease;
   }
 
@@ -100,7 +100,7 @@
     width: 1.5rem;
     border-radius: 50%;
     background: var(--color-grey-200);
-    border: 2px solid var(--color-grey-200);
+    border: 0.125rem solid var(--color-grey-200);
     transition: all 0.2s ease;
     cursor: pointer;
   }
@@ -118,9 +118,9 @@
 
 @utility custom-checkbox {
   appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--color-grey-200);
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 0.125rem solid var(--color-grey-200);
   background-color: transparent;
   cursor: pointer;
   display: grid;
@@ -138,8 +138,8 @@
 
   &:checked::before {
     content: "";
-    width: 12px;
-    height: 9px;
+    width: 0.75rem;
+    height: 0.5625rem;
     background-color: var(--color-grey-900);
     mask-image: url('./assets/images/icon-check.svg');
     mask-repeat: no-repeat;

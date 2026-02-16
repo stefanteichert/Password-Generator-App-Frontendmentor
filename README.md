@@ -34,7 +34,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add your solution URL here]
-- Live Site URL: [Add your live site URL here]
+- Live Site URL: [https://password-generator-app-frontendment.vercel.app/]
 
 ---
 

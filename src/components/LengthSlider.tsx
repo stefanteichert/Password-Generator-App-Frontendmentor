@@ -11,7 +11,7 @@ const LengthSlider = ({ length, min, max, onChange }: LengthSliderProps) => {
 
   const progress = ((length - min) / (max - min)) * 100;
   return (
-    <div>
+    <div className="mb-8">
       <div className='flex flex-row justify-between items-center'>
         <label htmlFor="length-slider" className='text-preset-4 text-grey-200 md:text-preset-3'>Character Length</label>
         <p className='text-preset-2 text-green-200 md:text-preset-1'>{length}</p>

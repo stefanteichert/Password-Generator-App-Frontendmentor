@@ -49,16 +49,16 @@ function App() {
   const strengthScore = calculatePasswordStrength(settings);
 
   return (
-    <div className='flex flex-col items-center min-h-dvh px-4 py-16'>
+    <div className='flex flex-col items-center justify-center min-h-screen '>
       <Header />
       <main>
         <section className='flex flex-col gap-4 max-w-135'>
           <PasswordDisplay password={password} onCopy={handleCopy} />
-          <form className='p-4 bg-grey-800 flex flex-col gap-4' onSubmit={handleGenerate}>
+          <form className='p-4 bg-grey-800 flex flex-col gap-4 md:gap-8' onSubmit={handleGenerate}>
             <fieldset className="border-none p-0 m-0">
               <legend className="sr-only">Password Generator Settings</legend>
               <LengthSlider length={settings.length} min={min} max={max} onChange={handleSliderChange} />
-              <div className='flex flex-col gap-4'>
+              <div className='flex flex-col gap-4 mb-4'>
                 <Checkbox label='Include Uppercase Letters' name='uppercase' checked={settings.uppercase} onChange={handleCheckboxChange} />
                 <Checkbox label='Include Lowercase Letters' name='lowercase' checked={settings.lowercase} onChange={handleCheckboxChange} />
                 <Checkbox label='Include Numbers' name='numbers' checked={settings.numbers} onChange={handleCheckboxChange} />
