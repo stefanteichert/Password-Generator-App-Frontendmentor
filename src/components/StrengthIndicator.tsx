@@ -16,27 +16,32 @@ const StrengthIndicator = ({ score }: StrengthIndicatorProps) => {
   const bars = [1, 2, 3, 4];
   const config = STRENGTH_CONFIG[score];
   return (
-
-    <div className="flex items-center justify-between bg-grey-950 p-4">
-      <span className="text-grey-600 uppercase text-preset-4 md:text-preset-3">Strength</span>
-      <div className="flex gap-2">
-        <span className={`text-preset-3 text-grey-200 uppercase md:text-preset-2`}>
+    <section
+      className="flex items-center justify-between bg-grey-950 p-4"
+      aria-labelledby="strength-title strength-value">
+      <span id="strength-title" className="text-grey-600 uppercase text-preset-4 md:text-preset-3">
+        Strength
+      </span>
+      <div className="flex items-center gap-4">
+        <span id="strength-value" className="text-grey-200 uppercase text-preset-3 md:text-preset-2">
           {config.label}
         </span>
-        {bars.map((barValue) => {
-          const isFilled = barValue <= score;
-          return (
-            <div
-              key={barValue}
-              className={`h-7 w-2.5 border-2 transition-colors ${isFilled
-                ? `${config.color} ${config.borderColor}`
-                : 'border-grey-200 bg-transparent'
-                }`}
-            />
-          );
-        })}
+        <div className="flex gap-2" aria-hidden="true">
+          {bars.map((barValue) => {
+            const isFilled = barValue <= score;
+            return (
+              <div
+                key={barValue}
+                className={`h-7 w-2.5 border-2 transition-colors ${isFilled
+                  ? `${config.color} ${config.borderColor}`
+                  : 'border-grey-200 bg-transparent'
+                  }`}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
 
   )
 }

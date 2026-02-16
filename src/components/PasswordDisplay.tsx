@@ -26,7 +26,8 @@ const PasswordDisplay = ({ password, onCopy }: PasswordDisplayProps) => {
   };
 
   return (
-    <div className='p-4 bg-grey-800 flex flex-row justify-between items-center gap-4'>
+    <section className='p-4 bg-grey-800 flex flex-row justify-between items-center gap-4'
+      aria-label="Generated Password Result">
       <input type='text' readOnly aria-label="Generated Password" placeholder='P4$5W0rD!' className='text-preset-2 text-grey-700 bg-transparent w-full md:text-preset-1 ' value={password} />
       <div className='relative flex items-center shrink-0'>
         {isCopy && (
@@ -41,11 +42,12 @@ const PasswordDisplay = ({ password, onCopy }: PasswordDisplayProps) => {
           type='button'
           onClick={handleCopyButtonClick}
           className="hover:cursor-pointer group"
+          aria-label="Copy password to clipboard"
         >
           <CopyIcon className='text-green-200 group-hover:text-white transition-colors' />
         </button>
       </div>
-    </div>
+    </section>
   )
 }
 
