@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add your solution URL here]
-- Live Site URL: [https://password-generator-app-frontendment.vercel.app/]
+- Solution URL: [Frontendmentor.io](https://www.frontendmentor.io/solutions/password-generator-app-with-react-tailwindcss-typescript-vitest-MwVbm8ise4)
+- Live Site URL: [Vercel](https://password-generator-app-frontendment.vercel.app/)
 
 ---
 
